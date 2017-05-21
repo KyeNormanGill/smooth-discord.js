@@ -94,6 +94,13 @@ class SmoothClient extends Client {
 		this.on('message', message => messageH.handleMessage(message));
 	}
 
+	/**
+     * Logins the client and initialises the commands.
+     * Resolves once client is ready.
+     * @param {string} token - Client token.
+     * @returns {Promise<string>}
+     */
+
 	login(token) {
 		return new Promise((resolve, reject) => {
 			super.login(token).catch(reject);

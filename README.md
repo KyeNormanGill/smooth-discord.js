@@ -17,7 +17,7 @@ Join my discord server: https://discord.gg/MBVyQdT
 
 ## Command template
 ```js
-const { Command } = require('../../src/index.js');
+const { Command } = require('smooth-discord.js');
 
 module.exports = class TestCommand extends Command {
 	constructor() {

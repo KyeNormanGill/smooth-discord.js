@@ -1,4 +1,4 @@
-class messageHandler {
+class Handler {
 	handleMessage(message) {
 		const prefix = message.client.prefix;
 		if (message.author.bot || !message.content.startsWith(prefix)) return;
@@ -16,4 +16,4 @@ class messageHandler {
 	}
 }
 
-module.exports = messageHandler;
+module.exports = Handler;

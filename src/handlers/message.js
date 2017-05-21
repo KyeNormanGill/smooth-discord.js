@@ -2,6 +2,7 @@ class messageHandler {
 	handleMessage(message) {
 		const prefix = message.client.prefix;
 		if (message.author.bot || !message.content.startsWith(prefix)) return;
+		if (message.client.selfbot && message.author.id !== message.client.owner) return;
 
 		const client = message.client;
 		const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();

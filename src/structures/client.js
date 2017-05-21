@@ -4,8 +4,6 @@ const fs = require('fs');
 const MessageHandler = require('../handlers/message.js');
 const messageH = new MessageHandler();
 
-
-
 class SmoothClient extends Client {
 	/**
 	 * @typedef {Object} ClientOptions

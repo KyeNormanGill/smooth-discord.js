@@ -6,6 +6,7 @@ class Command {
 	 * @property {string} description - The description of the command.
 	 * @property {boolean} guildOnly - If the command can only by ran inside a guild channel.
 	 * @property {boolean} clean - If the message that ran a command should be deleted.
+	 * @property {string[]} aliases - An Array of aliases the command can use.
 	 */
 
 	/**
@@ -16,6 +17,8 @@ class Command {
 		if (options.description === undefined) throw Error('No description detected in command.');
 		if (options.guildOnly === undefined) options.guildOnly = false;
 		if (options.clean === undefined) options.clean = false;
+		if (options.aliases === undefined) options.aliases = [];
+		if (typeof aliases !== Array) throw Error('Aliases must be an Array.');
 
 		/**
 		 * The name of the command.
@@ -40,6 +43,12 @@ class Command {
 		 * @type {boolean}
 		 */
 		this.clean = options.clean;
+
+		/**
+		 * An Array of aliases the command can use.
+		 * @type {string[]}
+		 */
+		this.aliases = options.aliases;
 	}
 }
 

@@ -65,12 +65,10 @@ class SmoothClient extends Client {
 		this.unkownCommandResponse = options.unkownCommandResponse;
 
 		/**
-		 * The directory of the commands
+		 * The collection of the commands.
 		 * @type {Collection<command name, command>}
 		 */
 		this.commands = new Collection();
-
-		// this.aliases = new Collection();
 
 		this.on('message', message => messageH.handleMessage(message));
 	}

@@ -13,7 +13,8 @@ class Handler {
 
 		// Get Command
 		const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
-		const command = message.client.commands.get(commandName);
+		const command = message.client.commands.get(commandName)
+			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		// Command check
 		if (!command) return;

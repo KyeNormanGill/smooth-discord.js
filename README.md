@@ -7,13 +7,43 @@ Join my discord server: https://discord.gg/MBVyQdT
 ## Usage
 * Node.js 6+
 
-## History
-* Initial commit
+## Features
+* Dynamic command handler. (Choose your directory)
+* Selfbot support.
+
+## Soon to come
+* Multiple aliases for commands.
+* Permission checking.
+
+## Command template
+```js
+const { Command } = require('smooth-discord.js');
+
+module.exports = class TestCommand extends Command {
+	constructor() {
+		super({
+			name: 'test',
+			description: 'Is test command',
+			guildOnly: false
+		});
+	}
+
+	run(message, args) {
+    // Command stuff goes here.
+	}
+};
+```
 
 ## Credits
 [Kye](https://github.com/KyeNormanGill "My github") - Creator/Developer.
 
-## License
-MIT License
+## Want to contribute?
+Fork it!
 
-Copyright (c) 2017 Kye
+Create your feature branch: git checkout -b my-new-feature
+
+Commit your changes: git commit -am 'Add some feature'
+
+Push to the branch: git push origin my-new-feature
+
+Submit a pull request!

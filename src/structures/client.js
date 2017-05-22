@@ -12,7 +12,7 @@ class SmoothClient extends Client {
 	 * @property {boolean} selfbot - Whether or not this bot is a selfbot.
 	 * @property {string} commandDirectory - The directory in which the commands are held.
 	 * @property {boolean} debug - Whether or not to log extra information to console.
-	 * @property {boolean} unkownCommandNotification - If the bot should respond if it sees a message that starts with it's prefix but isn't a command.
+	 * @property {boolean} unkownCommandResponse - If the bot should respond if it sees a message that starts with it's prefix but isn't a command.
 	 */
 
 	/**
@@ -26,7 +26,7 @@ class SmoothClient extends Client {
 		if (options.selfbot === undefined) options.selfbot = false;
 		if (options.commandDirectory === undefined) throw Error('No commands directory specified');
 		if (options.debug === undefined) options.debug = false;
-		if (options.unkownCommandNotification === undefined) options.unkownCommandNotification = false;
+		if (options.unkownCommandResponse === undefined) options.unkownCommandResponse = false;
 
 		/**
 		 * The bot owners ID.
@@ -92,6 +92,7 @@ class SmoothClient extends Client {
 					const Command = require(path.join(this.options.commandDirectory, file));
 					const cmd = new Command();
 					this.commands.set(cmd.name, cmd);
+					if (this.debug) console.log(`Loaded ${cmd.name}.js`);
 				}
 				console.log(`Loaded ${this.commands.size} commands!`);
 			});

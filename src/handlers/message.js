@@ -17,7 +17,10 @@ class Handler {
 			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		// Command check
-		if (!command) return;
+		if (!command) {
+			if (message.client.unkownCommandResponse) message.reply('Unkown command.');
+			return;
+		}
 
 		// GuildOnly Check
 		if (command.guildOnly && message.channel.type !== 'text') return;
@@ -27,6 +30,7 @@ class Handler {
 
 		const args = message.content.split(' ').slice(1).join(' ');
 		command.run(message, args);
+		if (message.client.debug) console.log(`Command ${command.name} was triggered by ${message.author.username} with args: '${args}'`);
 		message.client.emit('commandRun', command);
 	}
 }

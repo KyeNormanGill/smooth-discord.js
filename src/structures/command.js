@@ -5,6 +5,8 @@ class Command {
 	 * @property {string} name - The name of the command.
 	 * @property {string} description - The description of the command.
 	 * @property {boolean} guildOnly - If the command can only by ran inside a guild channel.
+	 * @property {boolean} ignorePrefix - If the command can be called without a prefix.
+	 * @property {boolean} clean - If the message that ran a command should be deleted.
 	 */
 
 	/**
@@ -14,6 +16,8 @@ class Command {
 		if (options.name === undefined) throw Error('No name property detected in command.');
 		if (options.description === undefined) throw Error('No description detected in command.');
 		if (options.guildOnly === undefined) options.guildOnly = false;
+		if (options.ignorePrefix === undefined) options.ignorePrefix = false;
+		if (options.clean === undefined) options.clean = false;
 
 		/**
 		 * The name of the command.
@@ -32,6 +36,18 @@ class Command {
 		 * @type {boolean}
 		 */
 		this.guildOnly = options.guildOnly;
+
+		/**
+		 * If the command can be called without a prefix.
+		 * @type {boolean}
+		 */
+		this.ignorePrefix = options.ignorePrefix;
+
+		/**
+		 * If the message that ran a command should be deleted.
+		 * @type {boolean}
+		 */
+		this.clean = options.clean;
 	}
 }
 

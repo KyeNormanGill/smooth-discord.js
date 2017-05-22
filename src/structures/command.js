@@ -17,6 +17,7 @@ class Command {
 		if (options.description === undefined) throw Error('No description detected in command.');
 		if (options.guildOnly === undefined) options.guildOnly = false;
 		if (options.clean === undefined) options.clean = false;
+		console.log(`Aliases: ${options.aliases}`);
 		if (options.aliases === undefined) options.aliases = [];
 		if (options.aliases instanceof Array) throw Error('Aliases must be an Array.');
 

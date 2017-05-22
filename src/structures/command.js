@@ -18,7 +18,7 @@ class Command {
 		if (options.guildOnly === undefined) options.guildOnly = false;
 		if (options.clean === undefined) options.clean = false;
 		if (options.aliases === undefined) options.aliases = [];
-		if (typeof aliases !== Array) throw Error('Aliases must be an Array.');
+		if (typeof options.aliases !== Array) throw Error('Aliases must be an Array.');
 
 		/**
 		 * The name of the command.

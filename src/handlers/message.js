@@ -2,6 +2,9 @@ class Handler {
 	handleMessage(message) {
 		const prefix = message.client.prefix;
 
+		// Prefix check
+		if (!message.content.startsWith(prefix)) return;
+
 		// Required checks
 		if (message.author.bot) return;
 
@@ -14,9 +17,6 @@ class Handler {
 
 		// Command check
 		if (!command) return;
-
-		// Ignore Prefix check
-		if (!command.ignorePrefix && !message.content.startsWith(prefix)) return;
 
 		// GuildOnly Check
 		if (command.guildOnly && message.channel.type !== 'text') return;

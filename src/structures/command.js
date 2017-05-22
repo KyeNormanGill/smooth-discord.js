@@ -20,7 +20,7 @@ class Command {
 		console.log(`Aliases: ${options.aliases}`);
 		if (options.aliases === undefined) options.aliases = [];
 		console.log(`Aliases: ${options.aliases} ${typeof options.aliases}`);
-		if (options.aliases instanceof Array) throw Error('Aliases must be an Array.');
+		if (options.aliases instanceof !Array) throw Error('Aliases must be an Array.');
 
 		/**
 		 * The name of the command.

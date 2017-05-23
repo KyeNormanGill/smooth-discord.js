@@ -9,7 +9,7 @@ class Handler {
 		if (message.author.bot) return;
 
 		// Selfbot check.
-		if (message.client.selfbot && message.author.id !== message.client.owners.first().id) return;
+		if (message.client.selfbot && message.client.owners.include(message.author.id)) return;
 
 		// Get Command.
 		const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
@@ -44,7 +44,7 @@ class Handler {
 			message.client.emit('commandError', command, err);
 
 			// Error response check
-			if (message.client.errorResponse) message.channel.send(`Something failed while running the \`${command.name}\` command.\n\`${err.name}: ${err.message}\`\n\nContact: ${message.client.owners.forEach(owner => owner.tag)}`);
+			if (message.client.errorResponse) message.channel.send(`Something failed while running the \`${command.name}\` command.\n\`${err.name}: ${err.message}\`\n\nContact: ${message.client.owners.forEach(owner => message.client.users.get(owner).tag)}`);
 		}
 	}
 }

@@ -7,7 +7,7 @@ const messageH = new MessageHandler();
 class SmoothClient extends Client {
 	/**
 	 * @typedef {Object} CommandOptions
-	 * @property {string[]} ownerIDs - The IDs of the bot owners (Must be atleast 1 and must be only 1 if it's a selfbot).
+	 * @property {string[]} owners - The IDs of the bot owners.
 	 * @property {string} prefix - The prefix to use with this bot.
 	 * @property {boolean} selfbot - Whether or not this bot is a selfbot.
 	 * @property {string} commandDirectory - The directory in which the commands are held.
@@ -21,11 +21,11 @@ class SmoothClient extends Client {
 	 */
 	constructor(options = {}) {
 		super(options);
-		if (options.ownerIDs === undefined) throw Error('You must specify atleast 1 owner.');
-		if (!Array.isArray(options.ownerIDs)) throw Error('Owners must be a typeOf Array.');
-		if (options.ownerIDs.length < 1) throw Error('You must specify atleast 1 owner.');
+		if (options.owners === undefined) throw Error('You must specify atleast 1 ownerID.');
+		if (!Array.isArray(options.owners)) throw Error('Owners must be an Array.');
+		if (options.owners.length < 1) throw Error('You must specify atleast 1 ownerID');
 		if (options.selfbot === undefined) options.selfbot = false;
-		if (options.selfbot === true && options.ownerIDs.length !== 1) throw Error('You cannot have more than 1 owner for a selfbot.');
+		if (options.selfbot && options.owners.length > 1) throw Error('You can only have one owner for a selfbot.');
 		if (options.prefix === undefined) options.prefix = '!';
 		if (options.commandDirectory === undefined) throw Error('No commands directory specified');
 		if (options.debug === undefined) options.debug = false;
@@ -33,11 +33,10 @@ class SmoothClient extends Client {
 		if (options.errorResponse === undefined) options.errorResponse = true;
 
 		/**
-		 * The IDs of the bot owners (Must be atleast 1 and must be only 1 if it's a selfbot).
+		 * The IDs of the bot owners.
 		 * @type {string[]}
 		 */
-		this.ownerIDs = options.ownerIDs;
-		console.log(`OwnerIDs: ${this.ownerIDs}`);
+		this.owners = options.owners;
 
 		/**
 		 * The prefix of the bot.
@@ -81,12 +80,6 @@ class SmoothClient extends Client {
 		 */
 		this.commands = new Collection();
 
-		/**
-		 * The collection of the owners by user object.
-		 * @type {Collection<ownerID, userobject>}
-		 */
-		this.owners = new Collection();
-
 		this.on('message', message => messageH.handleMessage(message));
 	}
 
@@ -101,7 +94,7 @@ class SmoothClient extends Client {
 		return new Promise((resolve, reject) => {
 			super.login(token).catch(reject);
 
-			// Initialise commands
+
 			fs.readdir(this.options.commandDirectory, (err, files) => {
 				if (err) console.error(err);
 				for (const file of files) {
@@ -111,11 +104,8 @@ class SmoothClient extends Client {
 					this.commands.set(cmd.name, cmd);
 					if (this.debug) console.log(`Loaded ${cmd.name}.js`);
 				}
-				console.log(`Loaded ${this.commands.size} commands!`);
+				if (this.debug) console.log(`Loaded ${this.commands.size} commands!`);
 			});
-
-			// Initialise owners on ready
-			this.once('ready', () => this.ownerIDs.forEach(ownerID => this.owners.set(ownerID, this.users.get(ownerID))));
 		});
 	}
 }

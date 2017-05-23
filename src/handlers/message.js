@@ -44,7 +44,7 @@ class Handler {
 			message.client.emit('commandError', command, err);
 
 			// Error response check
-			if (message.client.errorResponse) message.channel.send(`Something went wrong with the \`${command.name}\` command.\n\`${err.name}: ${err.message}\``);
+			if (message.client.errorResponse) message.channel.send(`Something failed while running the \`${command.name}\` command.\n\`${err.name}: ${err.message}\`\n\nContact: ${message.client.owners.forEach(owner => owner.tag)}`);
 		}
 	}
 }

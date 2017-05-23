@@ -7,7 +7,7 @@ const messageH = new MessageHandler();
 class SmoothClient extends Client {
 	/**
 	 * @typedef {Object} CommandOptions
-	 * @property {string} owner - The bot owners ID.
+	 * @property {string[]} ownerIDs - The IDs of the bot owners (Must be atleast 1 and must be only 1 if it's a selfbot).
 	 * @property {string} prefix - The prefix to use with this bot.
 	 * @property {boolean} selfbot - Whether or not this bot is a selfbot.
 	 * @property {string} commandDirectory - The directory in which the commands are held.
@@ -21,10 +21,12 @@ class SmoothClient extends Client {
 	 */
 	constructor(options = {}) {
 		super(options);
-
-		if (options.owner === undefined) throw Error('Could not find owner ID');
-		if (options.prefix === undefined) options.prefix = '!';
+		if (options.ownerIDs === undefined) throw Error('You must specify atleast 1 owner.');
+		if (!Array.isArray(options.ownerIDs)) throw Error('Owners must be a typeOf Array.');
+		if (options.ownerIDs.length < 1) throw Error('You must specify atleast 1 owner.');
 		if (options.selfbot === undefined) options.selfbot = false;
+		if (options.selfbot === true && options.ownerIDs.length !== 1) throw Error('You cannot have more than 1 owner for a selfbot.');
+		if (options.prefix === undefined) options.prefix = '!';
 		if (options.commandDirectory === undefined) throw Error('No commands directory specified');
 		if (options.debug === undefined) options.debug = false;
 		if (options.unkownCommandResponse === undefined) options.unkownCommandResponse = false;
@@ -34,7 +36,7 @@ class SmoothClient extends Client {
 		 * The bot owners ID.
 		 * @type {string}
 		 */
-		this.owner = options.owner;
+		this.owners = options.owners;
 
 		/**
 		 * The prefix of the bot.
@@ -78,6 +80,12 @@ class SmoothClient extends Client {
 		 */
 		this.commands = new Collection();
 
+		/**
+		 * The collection of the owners by user object.
+		 * @type {Collection<ownerID, userobject>}
+		 */
+		this.owners = new Collection();
+
 		this.on('message', message => messageH.handleMessage(message));
 	}
 
@@ -92,7 +100,7 @@ class SmoothClient extends Client {
 		return new Promise((resolve, reject) => {
 			super.login(token).catch(reject);
 
-			// Needs to be updated
+			// Initialise commands
 			fs.readdir(this.options.commandDirectory, (err, files) => {
 				if (err) console.error(err);
 				for (const file of files) {
@@ -104,6 +112,9 @@ class SmoothClient extends Client {
 				}
 				console.log(`Loaded ${this.commands.size} commands!`);
 			});
+
+			// Store users in client
+			this.ownerIDs.forEach(ownerID => this.owners.set(ownerID, this.users.get(ownerID)));
 		});
 	}
 }

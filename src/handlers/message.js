@@ -34,6 +34,7 @@ class Handler {
 			// Run command.
 			command.run(message, args);
 
+			// Debug console check.
 			if (message.client.debug) console.log(`Command ${command.name} was triggered by ${message.author.username} with args: '${args}'`);
 
 			// Emit commandRun event

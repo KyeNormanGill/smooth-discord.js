@@ -44,7 +44,7 @@ class Handler {
 			message.client.emit('commandError', command, err);
 
 			// Error response check
-			if (message.client.errorResponse) message.channel.send(`And error  \`${command.name}\` command.\n\`${err.name}: ${err.message}\`\n\nContact: ${message.client.owners.join(' ')}`);
+			if (message.client.errorResponse) message.channel.send(`An **error** occured while running **${command.name}.**\n\`${err.name}: ${err.message}\`\n\nPlease contact: **${message.client.owners.join(' ')}**`);
 		}
 	}
 }

@@ -30,13 +30,20 @@ class Handler {
 
 		const args = message.content.split(' ').slice(1).join(' ');
 
-		// Run command.
-		command.run(message, args);
+		try {
+			// Run command.
+			command.run(message, args);
 
-		if (message.client.debug) console.log(`Command ${command.name} was triggered by ${message.author.username} with args: '${args}'`);
+			if (message.client.debug) console.log(`Command ${command.name} was triggered by ${message.author.username} with args: '${args}'`);
 
-		// Emit commandRun event
-		message.client.emit('commandRun', command);
+			// Emit commandRun event
+			message.client.emit('commandRun', command, message);
+		} catch (err) {
+			// Emit commandError event
+			message.client.emit('commandError', command, err);
+
+			message.channel.send(`Something went wrong with the \`${command.name}\` command.\n\`${err.name}: ${err.message}\``);
+		}
 	}
 }
 

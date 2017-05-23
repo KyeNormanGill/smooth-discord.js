@@ -37,6 +37,7 @@ class SmoothClient extends Client {
 		 * @type {string[]}
 		 */
 		this.ownerIDs = options.ownerIDs;
+		console.log(`OwnerIDs: ${this.ownerIDs}`);
 
 		/**
 		 * The prefix of the bot.
@@ -115,6 +116,7 @@ class SmoothClient extends Client {
 
 			// Store users in client
 			this.ownerIDs.forEach(ownerID => this.owners.set(ownerID, this.users.get(ownerID)));
+			console.log(this.owners);
 		});
 	}
 }

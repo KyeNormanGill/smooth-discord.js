@@ -13,6 +13,7 @@ class SmoothClient extends Client {
 	 * @property {string} commandDirectory - The directory in which the commands are held.
 	 * @property {boolean} debug - Whether or not to log extra information to console.
 	 * @property {boolean} unkownCommandResponse - If the bot should respond if it sees a message that starts with it's prefix but isn't a command.
+	 * @property {boolean} errorResponse - If the bot should respond in a channel if there is an error with a command.
 	 */
 
 	/**
@@ -27,6 +28,7 @@ class SmoothClient extends Client {
 		if (options.commandDirectory === undefined) throw Error('No commands directory specified');
 		if (options.debug === undefined) options.debug = false;
 		if (options.unkownCommandResponse === undefined) options.unkownCommandResponse = false;
+		if (options.errorResponse === undefined) options.errorResponse = true;
 
 		/**
 		 * The bot owners ID.
@@ -63,6 +65,12 @@ class SmoothClient extends Client {
 		 * @type {boolean}
 		 */
 		this.unkownCommandResponse = options.unkownCommandResponse;
+
+		/**
+		 * If the bot should respond in a channel if there is an error with a command.
+		 * @type {boolean}
+		 */
+		this.errorResponse = options.errorResponse;
 
 		/**
 		 * The collection of the commands.

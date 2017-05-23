@@ -42,7 +42,8 @@ class Handler {
 			// Emit commandError event
 			message.client.emit('commandError', command, err);
 
-			message.channel.send(`Something went wrong with the \`${command.name}\` command.\n\`${err.name}: ${err.message}\``);
+			// Error response check
+			if (message.client.errorResponse) message.channel.send(`Something went wrong with the \`${command.name}\` command.\n\`${err.name}: ${err.message}\``);
 		}
 	}
 }

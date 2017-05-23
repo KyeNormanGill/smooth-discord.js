@@ -33,12 +33,6 @@ class SmoothClient extends Client {
 		if (options.errorResponse === undefined) options.errorResponse = true;
 
 		/**
-		 * The bot owners ID.
-		 * @type {string}
-		 */
-		this.owners = options.owners;
-
-		/**
 		 * The prefix of the bot.
 		 * @type {string}
 		 */

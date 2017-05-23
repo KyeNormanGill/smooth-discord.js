@@ -115,7 +115,10 @@ class SmoothClient extends Client {
 			});
 
 			// Store users in client
-			this.ownerIDs.forEach(ownerID => this.owners.set(ownerID, super.users.get(ownerID)));
+			this.ownerIDs.forEach(ownerID => {
+				this.owners.set(ownerID, this.users.get(ownerID));
+				console.log(ownerID);
+			});
 			console.log(this.owners);
 		});
 	}

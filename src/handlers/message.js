@@ -9,7 +9,7 @@ class Handler {
 		if (message.author.bot) return;
 
 		// Selfbot check.
-		if (message.client.selfbot && message.author.id !== message.client.owner) return;
+		if (message.client.selfbot && message.author.id !== message.client.owners.first().id) return;
 
 		// Get Command.
 		const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();

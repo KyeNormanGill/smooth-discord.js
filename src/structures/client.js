@@ -114,12 +114,8 @@ class SmoothClient extends Client {
 				console.log(`Loaded ${this.commands.size} commands!`);
 			});
 
-			// Store users in client
-			this.ownerIDs.forEach(ownerID => {
-				this.owners.set(ownerID, this.users.get('189696688657530880'));
-				console.log(ownerID);
-			});
-			console.log(this.owners);
+			// Initialise owners on ready
+			this.once('ready', () => this.ownerIDs.forEach(ownerID => this.owners.set(ownerID, this.users.get(ownerID))));
 		});
 	}
 }

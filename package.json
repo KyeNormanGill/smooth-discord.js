@@ -1,6 +1,6 @@
 {
   "name": "smooth-discord.js",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "A lightweight modular discord bot framework.",
   "main": "src/index.js",
   "scripts": {

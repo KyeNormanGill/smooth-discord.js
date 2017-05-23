@@ -4,12 +4,15 @@ class Handler {
 
 		// Prefix check.
 		if (!message.content.startsWith(prefix)) return;
+		console.log('passed prefix check');
 
 		// Required checks.
 		if (message.author.bot) return;
+		console.log('passed bot check');
 
 		// Selfbot check.
 		if (message.client.selfbot && message.client.owners.includes(message.author.id)) return;
+		console.log('passed selfbot check');
 
 		// Get Command.
 		const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
@@ -21,12 +24,15 @@ class Handler {
 			if (message.client.unkownCommandResponse) message.reply('Unkown command.');
 			return;
 		}
+		console.log('passed command check');
 
 		// GuildOnly Check.
 		if (command.guildOnly && message.channel.type !== 'text') return;
+		console.log('passed guild check');
 
 		// Clean check.
 		if (command.clean) message.delete();
+		console.log('passed clean check');
 
 		const args = message.content.split(' ').slice(1).join(' ');
 

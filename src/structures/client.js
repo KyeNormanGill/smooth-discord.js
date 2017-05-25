@@ -94,7 +94,6 @@ class SmoothClient extends Client {
 		return new Promise((resolve, reject) => {
 			super.login(token).catch(reject);
 
-
 			fs.readdir(this.options.commandDirectory, (err, files) => {
 				if (err) console.error(err);
 				for (const file of files) {

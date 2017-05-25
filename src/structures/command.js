@@ -1,4 +1,3 @@
-
 class Command {
 	/**
 	 * @typedef {Object} ClientOptions

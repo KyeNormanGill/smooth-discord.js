@@ -22,6 +22,9 @@ class Handler {
 			return;
 		}
 
+		// Owner only check
+		if (command.ownerOnly && !message.client.owners.includes(message.author.id)) return;
+
 		// GuildOnly Check.
 		if (command.guildOnly && message.channel.type !== 'text') return;
 

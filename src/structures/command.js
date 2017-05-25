@@ -5,6 +5,7 @@ class Command {
 	 * @property {string} description - The description of the command.
 	 * @property {boolean} guildOnly - If the command can only by ran inside a guild channel.
 	 * @property {boolean} clean - If the message that ran a command should be deleted.
+	 * @property {boolean} ownerOnly - If the message can only be run by owners.
 	 * @property {string[]} aliases - An Array of aliases the command can use.
 	 */
 
@@ -18,6 +19,7 @@ class Command {
 		if (options.clean === undefined) options.clean = false;
 		if (options.aliases === undefined) options.aliases = [];
 		if (!Array.isArray(options.aliases)) throw Error('Aliases must be an Array.');
+		if (options.ownerOnly === undefined) options.ownerOnly = false;
 
 		/**
 		 * The name of the command.
@@ -42,6 +44,12 @@ class Command {
 		 * @type {boolean}
 		 */
 		this.clean = options.clean;
+
+		/**
+		 * If the message can only be run by owners.
+		 * @type {boolean}
+		 */
+		this.ownerOnly = options.ownerOnly;
 
 		/**
 		 * An Array of aliases the command can use.

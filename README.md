@@ -19,21 +19,23 @@ Join my discord server: https://discord.gg/MBVyQdT
 ```js
 const { Command } = require('smooth-discord.js');
 
-module.exports = class TemplateCommand extends Command {
+module.exports = class TestCommand extends Command {
 	constructor() {
 		super({
-			name: 'template',
-			description: 'This is a template command.',
-			guildOnly: false,
-			ownerOnly: true,
-			aliases: ['temp', 'late']
+			name: '',
+			description: '',
+			guildOnly: ,
+			ownerOnly: ,
+			aliases: [''],
+			perms: ['']
 		});
 	}
 
 	run(message, args) {
-		// Code goes here
+		
 	}
 };
+
 
 ```
 

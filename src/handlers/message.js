@@ -46,7 +46,7 @@ class Handler {
 				}
 			});
 			if (text) {
-				message.channel.send(`Permission error, please give me the following permission(s) to use this command\`\`\`${text}\`\`\``);
+				return message.channel.send(`Permission error, please give me the following permission(s) to use this command\`\`\`${text}\`\`\``);
 			}
 		}
 

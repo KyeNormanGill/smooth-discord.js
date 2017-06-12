@@ -20,6 +20,7 @@ class Command {
 		if (!Array.isArray(options.aliases)) throw Error('Aliases must be an Array.');
 		if (options.ownerOnly === undefined) options.ownerOnly = false;
 		if (options.perms === undefined) options.perms = [];
+		if (!Array.isArray(options.perms)) throw Error('Permissions must be an Array.');
 
 		/**
 		 * The name of the command.

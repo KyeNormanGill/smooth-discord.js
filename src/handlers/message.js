@@ -1,3 +1,5 @@
+const { Permissions } = require('discord.js');
+
 class Handler {
 	handleMessage(message) {
 		const prefix = message.client.prefix;
@@ -18,8 +20,12 @@ class Handler {
 
 		// Command check.
 		if (!command) {
-			if (message.client.unkownCommandResponse) message.reply('Unkown command.');
+			if (message.client.unkownCommandResponse) message.reply('Unkown command.').catch(console.log);
 			return;
+		}
+
+		if (message.channel.type === 'text' && !message.channel.permissionsFor(message.client.user).has('SEND_MESSAGES')) {
+			message.author.send(`I do not have permission to speak in ${message.channel.toString()}`).catch(console.log);
 		}
 
 		// Owner only check
@@ -27,6 +33,22 @@ class Handler {
 
 		// GuildOnly Check.
 		if (command.guildOnly && message.channel.type !== 'text') return;
+
+		// Permissions check
+		if (command.perms) {
+			let text;
+			command.perms.forEach(perm => {
+				if (!Object.keys(Permissions.FLAGS).includes(perm)) {
+					throw Error(`Command ${command.name} has an invalid permission name: ${perm}`);
+				} else
+				if (message.channel.permissionsFor(message.client.user)) {
+					text += `${perm}\n`;
+				}
+			});
+			if (text) {
+				message.channel.send(`Permission error, please give me the following permission(s) to use this command\`\`\`${text}\`\`\``);
+			}
+		}
 
 		const args = message.content.split(' ').slice(1).join(' ');
 

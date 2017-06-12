@@ -6,6 +6,7 @@ class Command {
 	 * @property {boolean} guildOnly - If the command can only by ran inside a guild channel.
 	 * @property {boolean} ownerOnly - If the message can only be run by owners.
 	 * @property {string[]} aliases - An Array of aliases the command can use.
+	 * @property {string[]} perms - An Array of permissions the command needs.
 	 */
 
 	/**
@@ -18,6 +19,7 @@ class Command {
 		if (options.aliases === undefined) options.aliases = [];
 		if (!Array.isArray(options.aliases)) throw Error('Aliases must be an Array.');
 		if (options.ownerOnly === undefined) options.ownerOnly = false;
+		if (options.perms === undefined) options.perms = [];
 
 		/**
 		 * The name of the command.
@@ -48,6 +50,12 @@ class Command {
 		 * @type {string[]}
 		 */
 		this.aliases = options.aliases;
+
+		/**
+		 * An Array of permissions the command needs.
+		 * @type {string[]}
+		 */
+		this.perms = options.perms;
 	}
 }
 

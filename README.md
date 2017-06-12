@@ -10,10 +10,11 @@ Join my discord server: https://discord.gg/MBVyQdT
 ## Features
 * Dynamic command handler. (Choose your directory)
 * Selfbot support.
+* Multiple alias support for commands.
+* Command permission checking.
 
-## Soon to come
-* Multiple aliases for commands.
-* Permission checking.
+## Notes
+* Clean has been removed from commands.
 
 ## Command template
 ```js
@@ -32,7 +33,7 @@ module.exports = class TestCommand extends Command {
 	}
 
 	run(message, args) {
-		
+
 	}
 };
 

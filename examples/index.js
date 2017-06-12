@@ -1,10 +1,12 @@
 const smooth = require('../src');
-const path = require('path');
 
 const client = new smooth.Client({
-	commandDirectory: path.join(__dirname, 'commands'),
-	disableEveryone: true,
-	prefix: '...'
+	owners: ['189696688657530880'], // My Discord id
+	prefix: '!', // My prefix
+	selfbot: false, // If this is a selfbot
+	commandDirectory: require('path').join(__dirname, 'commands'), // The directory of my commands
+	debug: true, // If i want extra logs in my console.
+	unkownCommandResponse: false // If i should respond to unkown commands
 });
 
 client.on('ready', () => {

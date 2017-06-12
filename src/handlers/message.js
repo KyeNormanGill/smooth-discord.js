@@ -41,7 +41,7 @@ class Handler {
 				if (!Object.keys(Permissions.FLAGS).includes(perm)) {
 					throw Error(`Command ${command.name} has an invalid permission name: ${perm}`);
 				} else
-				if (message.channel.permissionsFor(message.client.user)) {
+				if (!message.channel.permissionsFor(message.client.user).has(perm)) {
 					text += `${perm}\n`;
 				}
 			});

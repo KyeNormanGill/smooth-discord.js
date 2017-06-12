@@ -36,7 +36,7 @@ class Handler {
 
 		// Permissions check
 		if (command.perms) {
-			let text;
+			let text = '';
 			command.perms.forEach(perm => {
 				if (!Object.keys(Permissions.FLAGS).includes(perm)) {
 					throw Error(`Command ${command.name} has an invalid permission name: ${perm}`);

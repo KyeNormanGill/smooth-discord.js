@@ -28,9 +28,6 @@ class Handler {
 		// GuildOnly Check.
 		if (command.guildOnly && message.channel.type !== 'text') return;
 
-		// Clean check.
-		if (command.clean) message.delete();
-
 		const args = message.content.split(' ').slice(1).join(' ');
 
 		try {

@@ -25,7 +25,6 @@ module.exports = class TemplateCommand extends Command {
 			name: 'template',
 			description: 'This is a template command.',
 			guildOnly: false,
-			clean: true,
 			ownerOnly: true,
 			aliases: ['temp', 'late']
 		});

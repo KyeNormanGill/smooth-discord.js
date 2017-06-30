@@ -96,6 +96,7 @@ class SmoothClient extends Client {
 					if (this.debug) console.log(`Loaded ${cmd.name}.js`);
 				}
 				if (this.debug) console.log(`Loaded ${this.commands.size} commands!`);
+				resolve();
 			});
 		});
 	}

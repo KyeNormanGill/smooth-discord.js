@@ -8,6 +8,8 @@ class Handler {
 		const regex = new RegExp(`^<@!?${message.client.user.id}>`);
 		const isMention = regex.test(message.content);
 
+		if (message.client.selfbot && isMention) return;
+
 		// Get command name.
 		let commandName;
 		if (isMention) {
@@ -31,7 +33,7 @@ class Handler {
 
 		// Command check.
 		if (!command) {
-			if (message.client.unkownCommandResponse) message.reply('Unkown command.').catch(console.log);
+			if (message.client.unkownCommandResponse) message.reply('Unkown command!').catch(console.log);
 			return;
 		}
 

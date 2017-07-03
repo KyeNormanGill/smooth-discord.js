@@ -4,8 +4,20 @@ class Handler {
 	handleMessage(message) {
 		const prefix = message.client.prefix;
 
+		// Mention check.
+		const regex = new RegExp(`^<@!?${message.client.user.id}>`);
+		const isMention = regex.test(message.content);
+
+		// Get command name.
+		let commandName;
+		if (isMention) {
+			commandName = message.content.split(' ').slice(1)[0].toLowerCase();
+		} else {
+			commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
+		}
+
 		// Prefix check.
-		if (!message.content.startsWith(prefix)) return;
+		if (!message.content.startsWith(prefix) && !isMention) return;
 
 		// Required checks.
 		if (message.author.bot) return;
@@ -13,10 +25,9 @@ class Handler {
 		// Selfbot check.
 		if (message.client.selfbot && !message.client.owners.includes(message.author.id)) return;
 
-		// Get Command.
-		const commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
+		// Get command.
 		const command = message.client.commands.get(commandName)
-			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+				|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		// Command check.
 		if (!command) {
@@ -24,6 +35,7 @@ class Handler {
 			return;
 		}
 
+		// Send message perm check.
 		if (message.channel.type === 'text' && !message.channel.permissionsFor(message.client.user).has('SEND_MESSAGES')) {
 			message.author.send(`I do not have permission to speak in ${message.channel.toString()}`).catch(console.log);
 		}
@@ -50,7 +62,13 @@ class Handler {
 			}
 		}
 
-		const args = message.content.split(' ').slice(1).join(' ');
+		// Get args.
+		let args;
+		if (isMention) {
+			args = message.content.split(' ').slice(2).join(' ');
+		} else {
+			args = message.content.split(' ').slice(1).join(' ');
+		}
 
 		try {
 			// Run command.

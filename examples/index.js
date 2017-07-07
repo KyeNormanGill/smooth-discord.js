@@ -6,7 +6,7 @@ const client = new smooth.Client({
 	selfbot: false, // If this is a selfbot
 	commandDirectory: require('path').join(__dirname, 'commands'), // The directory of my commands
 	debug: true, // If i want extra logs in my console.
-	unkownCommandResponse: false // If i should respond to unkown commands
+	unknownCommandResponse: false // If i should respond to unknown commands
 });
 
 client.on('ready', () => {

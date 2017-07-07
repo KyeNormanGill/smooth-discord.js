@@ -33,7 +33,7 @@ class Handler {
 
 		// Command check.
 		if (!command) {
-			if (message.client.unkownCommandResponse) message.reply('Unkown command!').catch(console.log);
+			if (message.client.unknownCommandResponse) message.reply('unknown command!').catch(console.log);
 			return;
 		}
 

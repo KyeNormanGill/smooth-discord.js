@@ -12,7 +12,7 @@ class SmoothClient extends Client {
 	 * @property {boolean} selfbot - Whether or not this bot is a selfbot.
 	 * @property {string} commandDirectory - The directory in which the commands are held.
 	 * @property {boolean} debug - Whether or not to log extra information to console.
-	 * @property {boolean} unkownCommandResponse - If the bot should respond if it sees a message that starts with it's prefix but isn't a command.
+	 * @property {boolean} unknownCommandResponse - If the bot should respond if it sees a message that starts with it's prefix but isn't a command.
 	 */
 
 	/**
@@ -28,7 +28,7 @@ class SmoothClient extends Client {
 		if (options.prefix === undefined) options.prefix = '!';
 		if (options.commandDirectory === undefined) throw Error('No commands directory specified');
 		if (options.debug === undefined) options.debug = false;
-		if (options.unkownCommandResponse === undefined) options.unkownCommandResponse = false;
+		if (options.unknownCommandResponse === undefined) options.unknownCommandResponse = false;
 
 		/**
 		 * The IDs of the bot owners.
@@ -64,7 +64,7 @@ class SmoothClient extends Client {
 		 * If the bot should respond if it sees a message that starts with it's prefix but isn't a command.
 		 * @type {boolean}
 		 */
-		this.unkownCommandResponse = options.unkownCommandResponse;
+		this.unknownCommandResponse = options.unknownCommandResponse;
 
 		/**
 		 * The collection of the commands.

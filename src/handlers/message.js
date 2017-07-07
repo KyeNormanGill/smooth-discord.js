@@ -21,11 +21,8 @@ class Handler {
 		// Prefix check.
 		if (!message.content.startsWith(prefix) && !isMention) return;
 
-		// Required checks.
-		if (message.author.bot) return;
-
 		// Selfbot check.
-		if (message.client.selfbot && !message.client.owners.includes(message.author.id)) return;
+		if ((message.client.selfbot && !message.client.owners.includes(message.author.id)) || message.author.bot) return;
 
 		// Get command.
 		const command = message.client.commands.get(commandName)

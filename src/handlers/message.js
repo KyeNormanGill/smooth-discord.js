@@ -83,7 +83,7 @@ class Handler {
 			message.client.emit('commandRun', command, message);
 		} catch (err) {
 			// Emit commandError event
-			message.client.emit('commandError', command, err);
+			message.client.emit('commandError', command, err, message);
 
 			message.channel.send(`An error occured while trying to run **${command.name}.**\`\`\`${err.name}: ${err.message}\`\`\`Please contact: **${message.client.owners.map(owner => message.client.users.get(owner).tag).join(' ')}**`);
 		}

@@ -13,7 +13,7 @@ class Handler {
 		// Get command name.
 		let commandName;
 		if (isMention) {
-			commandName = message.content.split(' ').slice(1)[0].toLowerCase() || '';
+			commandName = message.content.split(' ').slice(1)[0] ? message.content.split(' ').slice(1)[0] : '';
 		} else {
 			commandName = message.content.slice(prefix.length).split(' ')[0].toLowerCase();
 		}

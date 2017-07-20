@@ -6,7 +6,7 @@ const messageH = new MessageHandler();
 
 class SmoothClient extends Client {
 	/**
-	 * @typedef {Object} CommandOptions
+	 * @typedef {Object} ClientOptions
 	 * @property {string[]} owners - The IDs of the bot owners.
 	 * @property {string} prefix - The prefix to use with this bot.
 	 * @property {boolean} selfbot - Whether or not this bot is a selfbot.

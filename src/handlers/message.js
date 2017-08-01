@@ -1,7 +1,7 @@
 const { Permissions } = require('discord.js');
 
 class Handler {
-	handleMessage(message) {
+	async handleMessage(message) {
 		const prefix = message.client.prefix;
 
 		// Mention check.
@@ -71,7 +71,7 @@ class Handler {
 
 		try {
 			// Run command.
-			command.run(message, args);
+			await command.run(message, args);
 
 			// Debug console check.
 			if (message.client.debug) console.log(`Command ${command.name} was triggered by ${message.author.username} with args: '${args}'`);
